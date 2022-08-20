@@ -1,13 +1,37 @@
 package com.internProject.shortly.util;
 
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
  *
  */
-public class urlShortener {
+public class UrlShortener {
     private static String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+
+    /**
+     * This method is a helper function to encode Url
+     *
+     * @param encodeMethod a String of encode method
+     * @return  Return a String of size 6 based on the provided encode method
+     */
+    public static String encodeUrl(String encodeMethod) {
+
+        String generatedCode = "";
+        if (Objects.equals(encodeMethod, "random")) {
+            // generated a random string of 6 letters
+            generatedCode = encodeRandom();
+        } else if ((Objects.equals(encodeMethod, "base62"))) {
+            // convert a  number from base 10 to base 62
+            int randomNum = (int) (Math.random() * (Integer.MAX_VALUE));
+            generatedCode = encodeBase62(randomNum);
+        }
+
+        return generatedCode;
+    }
+
 
     /**
      *  this medthod produces short URLs like "KtLa2U",

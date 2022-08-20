@@ -14,23 +14,23 @@ class ShortlyApplicationTests {
 	}
 
 
-	@Autowired
-	private UrlService urlService;
-	@Test
-	void testCreateUrl(){
-		Url url= new Url();
-		url.setLongUrl("longUrl");
-		url.setShortUrl("shortUrl");
-
-		urlService.createUrl(url);
-	}
-
-
-	@Test
-	void testGetByShortUrl(){
-
-		Url url = urlService.getByShortUrl("shortUrl");
-
-		System.out.println(url);
-	}
+//	@Autowired
+//	private UrlService urlService;
+//	@Test
+//	void testCreateUrl(){
+//		Url url= new Url();
+//		url.setLongUrl("longUrl");
+//		url.setShortUrl("asdshortUrl");
+//
+//		urlService.createUrl(url);
+//	}
+//
+//
+//	@Test
+//	void testGetByShortUrl(){
+//
+//		Url url = urlService.getByShortUrl("shortUrl");
+//
+//		System.out.println(url);
+//	}
 }
