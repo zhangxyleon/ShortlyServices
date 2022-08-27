@@ -5,9 +5,11 @@ import com.internProject.shortly.entity.Url;
 import com.internProject.shortly.exception.UrlRequestException;
 import com.internProject.shortly.util.UrlShortener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import static com.internProject.shortly.util.UrlValidator.isUrlValid;
 
@@ -36,7 +38,7 @@ public class UrlServiceImpl implements  UrlService{
         String generatedCode;
         generatedCode = UrlShortener.encodeUrl(encodeMethod);
 
-        //check whether this new short url is already used(In the future, this will be implemented by using database)
+        //check whether this new short url is already used
         while (urlRepository.getByShortUrl("http://localhost:8080/"+ generatedCode)!=null){
             generatedCode = UrlShortener.encodeUrl(encodeMethod);
         }
@@ -53,11 +55,13 @@ public class UrlServiceImpl implements  UrlService{
 
     @Override
     @Transactional
+    @Cacheable(value="Url", key="#shortUrl")
     public String getByShortUrl(String shortUrl) {
 
-        //check whether this short Url is in the database
+
         Url urlMapping = urlRepository.getByShortUrl(shortUrl);
 
+        //check whether this short Url is in the database
         if (urlMapping==null){
             throw new UrlRequestException(HttpStatus.NOT_FOUND,"Unable to get original link. It is not a valid  shorter Url");
         }

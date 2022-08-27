@@ -1,12 +1,13 @@
 package com.internProject.shortly.entity;
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name="url")
-public class Url {
-// define fields
-
+public class Url  /*implements Serializable*/ {
+    // define fields
+    //private static final long serialVersionUID = 7156526077883281623L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")

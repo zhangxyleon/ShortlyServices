@@ -2,6 +2,7 @@ package com.internProject.shortly.controller;
 
 
 
+import com.internProject.shortly.entity.Url;
 import com.internProject.shortly.exception.UrlRequestException;
 import com.internProject.shortly.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
