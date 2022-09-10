@@ -22,7 +22,7 @@ public class UrlShortener {
         String generatedCode = "";
         if (Objects.equals(encodeMethod, "random")) {
             // generated a random string of 6 letters
-            generatedCode = encodeRandom();
+            generatedCode = encodeRandom(7);
         } else if ((Objects.equals(encodeMethod, "base62"))) {
             // convert a  number from base 10 to base 62
             int randomNum = (int) (Math.random() * (Integer.MAX_VALUE));
@@ -36,12 +36,13 @@ public class UrlShortener {
     /**
      *  this medthod produces short URLs like "KtLa2U",
      *  using a random code of six digits or letters.
+     * @param length the length of generated code
      * @return a random generated short url
      */
-    public static String encodeRandom(){
+    public static String encodeRandom(int length){
         Random rand = new Random();
         StringBuilder shortUrl = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < length; i++) {
             shortUrl.append(alphabet.charAt(rand.nextInt(62)));
         }
         return shortUrl.toString();
@@ -53,10 +54,10 @@ public class UrlShortener {
      * @param base10 an int
      * @return a  6-letters string of a base 62 number
      */
-    public static String encodeBase62(Integer base10){
+    public static String encodeBase62(long base10){
         StringBuilder base62 = new StringBuilder();
         while(base10!=0){
-            base62.append(alphabet.charAt(base10%62));
+            base62.append(alphabet.charAt((int) (base10%62)));
             base10/=62;
         }
         while(base62.length()<6){
@@ -67,11 +68,11 @@ public class UrlShortener {
 
 
 
-    public static Integer decodeBase62(String base62){
-        int base10 = 0;
+    public static long decodeBase62(String base62){
+        long base10 = 0;
         for (int i = 0; i<base62.length();i++){
             int value = alphabet.indexOf((char)base62.charAt(i));
-            base10 += (int)(Math.pow(62,5-i) * value);
+            base10 += (long)(Math.pow(62,5-i) * value);
         }
         return base10;
     }

@@ -2,20 +2,20 @@ package com.internProject.shortly.controller;
 
 
 
+
 import com.internProject.shortly.entity.Url;
-import com.internProject.shortly.exception.UrlRequestException;
 import com.internProject.shortly.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.URL;
+
 
 import java.util.Map;
 
 
-@RestController
+@Controller
 public class UrlController {
 
 
@@ -41,22 +41,31 @@ public class UrlController {
 
         String shortUrl = urlService.createShortUrl(longUrl, encodeMethod);
 
-        return shortUrl;
+        return "http://localhost:8080/" + shortUrl;
+
+    }
+
+
+
+    @GetMapping("/url")
+    @ResponseBody
+    public String test(){
+
+        return "authenticated";
 
     }
 
     /**
-     * This method is to get  by origin url mapped by short url.
+     * This method is to redirect  by origin url mapped by short url.
      *
      * @param shortUrl
-     * @return origin url mapped by the given shortUrl
+     * @return redirect to origin url
      */
     @GetMapping("/{shortUrl}")
     public String getLongUrl(@PathVariable("shortUrl") String shortUrl){
 
-        return  urlService.getByShortUrl("http://localhost:8080/"+shortUrl);
+        return  "redirect:"+urlService.getByShortUrl(shortUrl);
     }
-
 
 
 }
