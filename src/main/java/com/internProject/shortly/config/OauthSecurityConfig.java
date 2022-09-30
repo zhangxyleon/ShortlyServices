@@ -15,7 +15,7 @@ package com.internProject.shortly.config;
 //        http
 //                .csrf().disable()
 //                .authorizeRequests().antMatchers("/user/**").permitAll()
-//                .antMatchers("/shorten").fullyAuthenticated()
+//                .antMatchers("/shorten","/url").fullyAuthenticated()
 //                .and()
 //                .oauth2Login();
 //        return http.build();

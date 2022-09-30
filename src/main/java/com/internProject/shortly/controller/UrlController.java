@@ -3,6 +3,7 @@ package com.internProject.shortly.controller;
 
 
 
+import com.internProject.shortly.annotation.RateLimit;
 import com.internProject.shortly.entity.Url;
 import com.internProject.shortly.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class UrlController {
      */
     @PostMapping("/shorten")
     @ResponseBody
+    @RateLimit(permitsPerSecond = 0.1)
     public String createShortUrl(@RequestBody Map<String, String> UrlRequest,  HttpServletResponse response){
 
         //deconstruct Request body
@@ -41,7 +43,7 @@ public class UrlController {
 
         String shortUrl = urlService.createShortUrl(longUrl, encodeMethod);
 
-        return "http://localhost:8080/" + shortUrl;
+        return "http://localhost:8081/" + shortUrl;
 
     }
 
@@ -55,6 +57,15 @@ public class UrlController {
 
     }
 
+
+    @GetMapping("/callback")
+    @ResponseBody
+    public String callback(){
+
+        return "callback";
+
+    }
+
     /**
      * This method is to redirect  by origin url mapped by short url.
      *
@@ -62,6 +73,7 @@ public class UrlController {
      * @return redirect to origin url
      */
     @GetMapping("/{shortUrl}")
+    @RateLimit(permitsPerSecond = 0.1)
     public String getLongUrl(@PathVariable("shortUrl") String shortUrl){
 
         return  "redirect:"+urlService.getByShortUrl(shortUrl);

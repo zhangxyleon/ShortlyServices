@@ -4,6 +4,7 @@ import com.internProject.shortly.DAO.UrlBase62Repository;
 import com.internProject.shortly.DAO.UrlRepository;
 import com.internProject.shortly.entity.Url;
 import com.internProject.shortly.entity.UrlBase62;
+import com.internProject.shortly.entity.User;
 import com.internProject.shortly.exception.UrlRequestException;
 import com.internProject.shortly.redis.RedisCacheService;
 import com.internProject.shortly.redis.RedisSequenceService;

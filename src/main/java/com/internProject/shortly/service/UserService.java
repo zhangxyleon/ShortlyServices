@@ -22,25 +22,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service
-public class UserService implements UserDetailsService {
-
-    @Autowired
-    private UserRepository userRepository;
-
-
-
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        List<User> user = userRepository.findByEmail(email);
-        if (user.size() == 0) {
-            throw new UsernameNotFoundException("User details not found for the user : " + email);
-        }
-        return new SecurityUser(user.get(0));
-    }
-
-
-
-}
+//@Service
+//public class UserService implements UserDetailsService {
+//
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//
+//
+//
+//    @Override
+//    @Transactional
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        List<User> user = userRepository.findByEmail(email);
+//        if (user.size() == 0) {
+//            throw new UsernameNotFoundException("User details not found for the user : " + email);
+//        }
+//        return new SecurityUser(user.get(0));
+//    }
+//
+//
+//
+//}

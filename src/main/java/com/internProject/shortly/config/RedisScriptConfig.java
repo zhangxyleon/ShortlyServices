@@ -17,4 +17,12 @@ public class RedisScriptConfig {
         Resource scriptSource = new ClassPathResource("redisCounter.lua");
         return RedisScript.of(scriptSource, Long.class);
     }
+
+
+
+    @Bean
+    public RedisScript<Long> limiterScript() {
+        Resource scriptSource = new ClassPathResource("redisLimiter.lua");
+        return RedisScript.of(scriptSource, Long.class);
+    }
 }

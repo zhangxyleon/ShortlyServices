@@ -24,7 +24,7 @@ public class User {
 
 //    @OneToMany(mappedBy = "User", fetch =FetchType.LAZY)
 //    private List<Url> urls;
-//
+
 //    @OneToMany(mappedBy = "User", fetch =FetchType.LAZY)
 //    private List<UrlBase62> urlBase62s;
 
